@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/cinema-scout/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cinema scout</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css"
+      integrity="sha512-4xo8blKMVCiXpTaLzQSLSw3KFOVPWhm/TRtuPVc4WG6kUgjH6J03IBuG7JZPkcWMxJ5huwaBpOpnwYElP/m6wg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    
+    <script type="module" crossorigin src="/cinema-scout/commonHelpers.js"></script>
+    <link rel="stylesheet" href="/cinema-scout/assets/index-33e228d1.css">
+  </head>
+  <body>
+    <header class="header">
+  <div class="container header-container">
+    <a href="#!" class="header-logo">Cinema Scout</a>
+    <form class="header-search">
+      <input
+        type="text"
+        class="header-search-input"
+        name="movie"
+        placeholder="Movie name"
+      />
+      <button class="header-search-btn">Search</button>
+    </form>
+  </div>
+</header>
+
+
+    <main>
+      <section class="library">
+  <div class="container library-container">
+    <ul class="library-list"></ul>
+    <span class="loader library-loader hide"></span>
+  </div>
+</section>
+
+    </main>
+
+    <div class="backdrop modal">
+  <div class="modal-container">
+    <div class="modal-dialog">
+      <button class="modal-close-btn">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img src="" alt="" class="modal-img" />
+      <div class="modal-content">
+        <h2 class="modal-title">Lorem ipsum dolor sit amet.</h2>
+        <p class="modal-status modal-info">Status: <span></span></p>
+        <p class="modal-released modal-info">Released date: <span></span></p>
+        <p class="modal-rating modal-info">Rating: <span></span></p>
+        <p class="modal-descr">Lorem ipsum dolor sit amet.</p>
+      </div>
+    </div>
+  </div>
+  <span class="loader modal-loader hide"></span>
+</div>
+
+
+    
+  </body>
+</html>
