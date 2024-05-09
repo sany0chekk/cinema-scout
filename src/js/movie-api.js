@@ -10,8 +10,9 @@ const options = {
   },
 };
 
+const BASE_URL = 'https://api.themoviedb.org/3';
+
 export async function fetchMoviesList(query) {
-  const BASE_URL = 'https://api.themoviedb.org/3/search/movie';
   const params = new URLSearchParams({
     api_key: API_KEY,
     include_adult: false,
@@ -20,16 +21,40 @@ export async function fetchMoviesList(query) {
     query,
   });
 
-  const result = await fetch(`${BASE_URL}?${params}`, options);
+  const result = await fetch(`${BASE_URL}/search/movie?${params}`, options);
   return result.json();
 }
 
 export async function fetchMovie(id) {
-  const BASE_URL = 'https://api.themoviedb.org/3/movie';
   const params = new URLSearchParams({
+    api_key: API_KEY,
     language: 'en-US',
   });
 
-  const result = await fetch(`${BASE_URL}/${id}?${params}`, options);
+  const result = await fetch(`${BASE_URL}/movie/${id}?${params}`, options);
+  return result.json();
+}
+
+export async function fetchPopularMovies() {
+  const params = new URLSearchParams({
+    api_key: API_KEY,
+    language: 'en-US',
+    page: 1,
+  });
+
+  const result = await fetch(`${BASE_URL}/movie/popular?${params}`, options);
+  return result.json();
+}
+
+export async function fetchMovieTrailer(id) {
+  const params = new URLSearchParams({
+    api_key: API_KEY,
+    language: 'en-US',
+  });
+
+  const result = await fetch(
+    `${BASE_URL}/movie/${id}/videos?${params}`,
+    options
+  );
   return result.json();
 }

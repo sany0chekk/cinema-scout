@@ -1,5 +1,11 @@
 'use strict';
-import { fetchMovie } from './movie-api';
+
+import * as basicLightbox from 'basiclightbox';
+import 'basiclightbox/dist/basicLightbox.min.css';
+
+import Swal from 'sweetalert2';
+
+import { fetchMovie, fetchMovieTrailer } from './movie-api';
 
 const libraryEl = document.querySelector('.library-list');
 const modalCloseBtn = document.querySelector('.modal-close-btn');
@@ -22,8 +28,9 @@ async function renderMovieInfo(event) {
       loader.classList.remove('hide');
 
       const {
+        id: videoID,
         poster_path: img,
-        original_title: title,
+        title,
         status,
         release_date,
         genres,
@@ -32,6 +39,7 @@ async function renderMovieInfo(event) {
       } = data;
 
       const modalEl = document.querySelector('.modal');
+      const modalVideoBtn = modalEl.querySelector('.modal-video-btn');
       const modalElements = {
         img: modalEl.querySelector('.modal-img'),
         title: modalEl.querySelector('.modal-title'),
@@ -48,12 +56,42 @@ async function renderMovieInfo(event) {
       modalElements.rating.textContent = rating;
       modalElements.descr.textContent = overview;
 
+      modalVideoBtn.dataset.id = videoID;
+
       modalEl.classList.add('active');
       document.body.style.overflow = 'hidden';
+
+      modalVideoBtn.addEventListener('click', showMovieTrailer);
     } catch (error) {
       console.log(error);
     } finally {
       loader.classList.add('hide');
     }
+  }
+}
+
+async function showMovieTrailer(event) {
+  const id = event.currentTarget.dataset.id;
+
+  try {
+    const data = await fetchMovieTrailer(id);
+
+    if (!data.results.length) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: "We couldn't find the trailer for this movie",
+      });
+    } else {
+      const key = data.results[0].key;
+
+      const instance = basicLightbox.create(`
+    <iframe src="https://www.youtube.com/embed/${key}" width="800" height="500" frameborder="0"></iframe>
+  `);
+
+      instance.show();
+    }
+  } catch (error) {
+    console.log(error);
   }
 }
