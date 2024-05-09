@@ -44,25 +44,6 @@ function handleNextPage() {
   });
 }
 
-window.addEventListener('popstate', handlePopstate);
-
-function handlePopstate(event) {
-  const pathname = location.pathname;
-
-  if (pathname === '/popular') {
-    currentPage = 1;
-    renderPopularMovies();
-  } else if (pathname.startsWith('/search/')) {
-    const pathParts = pathname.substring('/search/'.length).split('/');
-    const searchPage = pathParts[0] || 1;
-    const searchQuery = pathParts[1] || '';
-    currentPage = parseInt(searchPage, 10);
-    renderElements({
-      target: { elements: { 'header-search-input': { value: searchQuery } } },
-    });
-  }
-}
-
 async function renderElements(event) {
   event.preventDefault();
   const movieName = searchForm.querySelector('.header-search-input');
@@ -131,16 +112,6 @@ async function renderElements(event) {
         prevPageBtn.disabled = false;
       }
     }
-
-    if (movieName.value.trim()) {
-      history.pushState(
-        {},
-        '',
-        `/search/${movieName.value.trim()}/${currentPage}`
-      );
-    } else {
-      history.pushState({}, '', '/popular');
-    }
   } catch (error) {
     console.log(error);
   } finally {
@@ -151,8 +122,6 @@ async function renderElements(event) {
 async function renderPopularMovies() {
   const libraryEl = document.querySelector('.library-list');
   const loader = document.querySelector('.library-loader');
-
-  history.pushState({}, '', '/popular');
 
   libraryEl.innerHTML = '';
   loader.classList.remove('hide');
