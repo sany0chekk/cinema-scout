@@ -22,7 +22,7 @@
     <script type="module" crossorigin src="/cinema-scout/commonHelpers.js"></script>
     <link rel="modulepreload" crossorigin href="/cinema-scout/assets/vendor-79407357.js">
     <link rel="stylesheet" href="/cinema-scout/assets/vendor-b3ce9496.css">
-    <link rel="stylesheet" href="/cinema-scout/assets/index-48ea33de.css">
+    <link rel="stylesheet" href="/cinema-scout/assets/index-96225685.css">
   </head>
   <body>
     <header class="header">
@@ -45,12 +45,36 @@
     <main>
       <section class="library">
   <div class="container library-container">
-    <ul class="library-list"></ul>
+    <h2 class="library-title">Popular Movies</h2>
+    <span class="library-message">
+      <i class="fa-solid fa-circle-info"></i>
+      No results found
+    </span>
     <span class="loader library-loader hide"></span>
+    <ul class="library-list"></ul>
+    <div class="library-pagination">
+      <button class="library-prev-btn library-btn">
+        <i class="fa-solid fa-angles-left"></i>
+      </button>
+      <p class="library-page">1</p>
+      <button class="library-next-btn library-btn">
+        <i class="fa-solid fa-angles-right"></i>
+      </button>
+    </div>
   </div>
 </section>
 
     </main>
+
+    <footer class="footer">
+  <div class="container footer-container">
+    <p class="footer-author">
+      Developer: <a href="https://www.instagram.com/hackingbegin/">sany0chek</a>
+    </p>
+    <p class="footer-info">@2024</p>
+  </div>
+</footer>
+
 
     <div class="backdrop modal">
   <div class="modal-container">
@@ -72,8 +96,9 @@
       </div>
     </div>
   </div>
-  <span class="loader modal-loader hide"></span>
 </div>
+
+<span class="loader modal-loader hide"></span>
 
 
     
