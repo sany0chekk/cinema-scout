@@ -19,7 +19,35 @@ body {
   }
 }
 
+@keyframes rotate {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 .loader {
+  display: flex;
+  justify-content: center;
+}
+.loader__container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+.loader__film {
+  position: absolute;
+  top: -30px;
+  left: 0;
+  display: flex;
+}
+.loader__film-img {
+  animation: rotate 1.5s linear infinite;
+}
+
+/* .loader {
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -44,7 +72,7 @@ body {
   border-color: transparent transparent #ff3d00 #ff3d00;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border-radius: 50%; 
   box-sizing: border-box;
   animation: rotationBack 0.5s linear infinite;
   transform-origin: center center;
@@ -71,4 +99,4 @@ body {
   100% {
     transform: rotate(-360deg);
   }
-}
+} */
