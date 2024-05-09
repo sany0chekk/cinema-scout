@@ -2,36 +2,81 @@
 
 import { fetchMoviesList, fetchPopularMovies } from './movie-api';
 
+renderPopularMovies();
+
+let currentPage = 1;
+
 const searchForm = document.querySelector('.header-search');
 searchForm.addEventListener('submit', renderElements);
 
+const prevPageBtn = document.querySelector('.library-prev-btn');
+const nextPageBtn = document.querySelector('.library-next-btn');
+
+prevPageBtn.addEventListener('click', handlePrevPage);
+nextPageBtn.addEventListener('click', handleNextPage);
+
+function handlePrevPage() {
+  const pageCounterEl = document.querySelector('.library-page');
+  currentPage--;
+  renderElements(event);
+  pageCounterEl.textContent = currentPage;
+
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
+}
+
+function handleNextPage() {
+  const pageCounterEl = document.querySelector('.library-page');
+  currentPage++;
+  renderElements(event);
+  pageCounterEl.textContent = currentPage;
+
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
+}
+
 async function renderElements(event) {
   event.preventDefault();
-  const movieName = event.currentTarget.elements.movie;
+  const movieName = searchForm.querySelector('.header-search-input');
   const libraryEl = document.querySelector('.library-list');
   const loader = document.querySelector('.library-loader');
+  const message = document.querySelector('.library-message');
+  const libraryTitle = document.querySelector('.library-title');
+  const libraryPaginationEl = document.querySelector('.library-pagination');
+
+  loader.classList.remove('hide');
+  libraryEl.innerHTML = '';
 
   try {
-    const data = await fetchMoviesList(movieName.value.trim());
+    const data = await fetchMoviesList(movieName.value.trim(), currentPage);
 
-    libraryEl.innerHTML = '';
-    loader.classList.remove('hide');
+    libraryTitle.innerHTML = `Search query: <span>${movieName.value.trim()}</span>`;
 
-    const markup = data.results
-      .map(
-        ({
-          id,
-          title,
-          overview,
-          release_date: date,
-          vote_average: rate,
-          poster_path: img,
-        }) => {
-          if (!img) {
-            return '';
-          }
+    if (!data.results.length) {
+      message.classList.add('active');
+      libraryPaginationEl.classList.remove('active');
+    } else {
+      message.classList.remove('active');
 
-          return `
+      const markup = data.results
+        .map(
+          ({
+            id,
+            title,
+            overview,
+            release_date: date,
+            vote_average: rate,
+            poster_path: img,
+          }) => {
+            if (!img) {
+              return '';
+            }
+
+            return `
         <li class="library-item">
           <img src="https://image.tmdb.org/t/p/w500/${img}" alt="${title}" class="library-item-poster" />
           <div class="library-item-content">
@@ -42,10 +87,26 @@ async function renderElements(event) {
           </div>
         </li>
       `;
-        }
-      )
-      .join('');
-    libraryEl.insertAdjacentHTML('beforeend', markup);
+          }
+        )
+        .join('');
+      libraryEl.insertAdjacentHTML('beforeend', markup);
+      libraryPaginationEl.classList.add('active');
+
+      const totalPages = data.total_pages;
+
+      if (currentPage >= totalPages) {
+        nextPageBtn.disabled = true;
+      } else {
+        nextPageBtn.disabled = false;
+      }
+
+      if (currentPage <= 1) {
+        prevPageBtn.disabled = true;
+      } else {
+        prevPageBtn.disabled = false;
+      }
+    }
   } catch (error) {
     console.log(error);
   } finally {
@@ -57,11 +118,11 @@ async function renderPopularMovies() {
   const libraryEl = document.querySelector('.library-list');
   const loader = document.querySelector('.library-loader');
 
+  libraryEl.innerHTML = '';
+  loader.classList.remove('hide');
+
   try {
     const data = await fetchPopularMovies();
-
-    libraryEl.innerHTML = '';
-    loader.classList.remove('hide');
 
     const markup = data.results
       .map(
@@ -98,5 +159,3 @@ async function renderPopularMovies() {
     loader.classList.add('hide');
   }
 }
-
-renderPopularMovies();

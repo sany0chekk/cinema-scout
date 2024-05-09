@@ -6,5 +6,10 @@
 
 @import url('./components/header.css');
 @import url('./components/library.css');
+@import url('./components/footer.css');
 
 @import url('./components/movie-about-modal.css');
+
+.hide {
+  display: none;
+}

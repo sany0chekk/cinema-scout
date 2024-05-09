@@ -21,11 +21,12 @@ async function renderMovieInfo(event) {
   if (event.target.classList.contains('library-item-btn')) {
     const id = event.target.dataset.id;
     const loader = document.querySelector('.modal-loader');
+    const modalEl = document.querySelector('.modal');
+
+    loader.classList.remove('hide');
 
     try {
       const data = await fetchMovie(id);
-
-      loader.classList.remove('hide');
 
       const {
         id: videoID,
@@ -38,7 +39,6 @@ async function renderMovieInfo(event) {
         overview,
       } = data;
 
-      const modalEl = document.querySelector('.modal');
       const modalVideoBtn = modalEl.querySelector('.modal-video-btn');
       const modalElements = {
         img: modalEl.querySelector('.modal-img'),

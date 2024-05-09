@@ -13,12 +13,12 @@ const options = {
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 
-export async function fetchMoviesList(query) {
+export async function fetchMoviesList(query, page) {
   const params = new URLSearchParams({
     api_key: API_KEY,
     include_adult: false,
     language: 'en-US',
-    page: 1,
+    page,
     query,
   });
 

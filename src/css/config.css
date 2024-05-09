@@ -23,8 +23,7 @@ body {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  display: block;
-  margin: 0 auto;
+  display: inline-block;
   position: relative;
   border: 3px solid;
   border-color: #fff #fff transparent transparent;
@@ -72,8 +71,4 @@ body {
   100% {
     transform: rotate(-360deg);
   }
-}
-
-.hide {
-  display: none;
 }
