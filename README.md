@@ -6,7 +6,7 @@ information about the films, such as the release date, genre, and rating. With
 Cinema Scout, you can easily discover new movies and stay up-to-date with the
 latest releases.
 
-![Cinema Scout Screenshot](img/screenshot.png)
+![Cinema Scout Screenshot](./src/img/screenshot.png)
 
 ## Author
 
@@ -14,7 +14,7 @@ latest releases.
 
 ## Libraries Used
 
-- [basiclightbox](https://github.com/sharanda/basicLightbox): A lightweight and
+- [basiclightbox](https://basiclightbox.electerious.com): A lightweight and
   customizable lightbox plugin for displaying images, videos, and other content.
 - [sweetAlert2](https://github.com/sweetalert2/sweetalert2): A beautiful and
   highly customizable replacement for JavaScript's native alert, prompt, and
