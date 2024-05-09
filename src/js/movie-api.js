@@ -1,7 +1,8 @@
 'use strict';
 
-const API_KEY = import.meta.env.VITE_API_KEY;
-const AUTH_TOKEN = import.meta.env.VITE_AUTH_TOKEN;
+const API_KEY = 'b210b8c265aa45ab35b8876089232222';
+const AUTH_TOKEN =
+  'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiMjEwYjhjMjY1YWE0NWFiMzViODg3NjA4OTIzMjIyMiIsInN1YiI6IjY2M2JjY2JlYmRjMjJhNDAxNjAxMDk3NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.zjkAl594EP84PYZFIQ6iSotECJtDLEMUn35DsNJdj60';
 const options = {
   method: 'GET',
   headers: {
