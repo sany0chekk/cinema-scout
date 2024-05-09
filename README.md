@@ -6,7 +6,7 @@ information about the films, such as the release date, genre, and rating. With
 Cinema Scout, you can easily discover new movies and stay up-to-date with the
 latest releases.
 
-![Cinema Scout Screenshot](./img/screenshot.png)
+![Cinema Scout Screenshot](./src/img/screenshot.png)
 
 ## Author
 
